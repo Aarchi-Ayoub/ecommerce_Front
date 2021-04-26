@@ -1,4 +1,3 @@
-import 'bootstrap-material-design/dist/css/bootstrap-material-design.css';
 const App = () =>(
   <div>
     <h1> My ecommerce web site using Nodejs and Reactjs</h1>
