@@ -2,6 +2,8 @@ import React, { Fragment ,useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import { isAuthenticate } from '../auth/Authenticate'
 import Layout from '../pages/Layout'
+import { BiUserCircle } from "react-icons/bi";
+import { IoAddCircle , IoAtSharp , IoKeyOutline } from "react-icons/io5";
 import './Dashboard.css'
 const AdminDashboard = () => {
     // Get user informations from JWT
@@ -17,16 +19,13 @@ const AdminDashboard = () => {
                     <h5 className="card-title">Admin informations</h5>
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">
-                            <i class="fa fa-user-o" aria-hidden="true"></i>
-                            {name}
+                           <BiUserCircle />{name} 
                         </li>
                         <li className="list-group-item">
-                            <i class="fa fa-at" aria-hidden="true"></i>
-                            {email}
+                            <IoAtSharp />{email}
                         </li>
                         <li className="list-group-item">
-                            <i class="fa fa-key" aria-hidden="true"></i>
-                            {role ? 'Admin' : 'User'}
+                            <IoKeyOutline />{role ? 'Admin' : 'User'}
                         </li>
                     </ul>
                 </div>
@@ -37,20 +36,24 @@ const AdminDashboard = () => {
     const adminLinks = ()=> {
         return(
             <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">Admin links</h5>
-                                <ul className="list-group list-group-flush">
-                                    <li className="list-group-item">
-                                        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                                        <Link className="nav-link" to="/category/create">+Category</Link>
-                                    </li>
-                                    <li className="list-group-item">
-                                         <i class="fa fa-tags" aria-hidden="true"></i>
-                                        <Link className="nav-link" to="/product/create">+Product</Link>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                <div className="card-body">
+                    <h5 className="card-title">Admin links</h5>
+                    <ul className="list-group list-group-flush">
+                        <li className="list-group-item">
+                            <Link className="nav-link" to="/category/create">
+                                <IoAddCircle />
+                                Add Category
+                            </Link>
+                        </li>
+                        <li className="list-group-item">
+                            <Link className="nav-link" to="/product/create">
+                                <IoAddCircle />
+                                Add Product
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         )
     }
     return (

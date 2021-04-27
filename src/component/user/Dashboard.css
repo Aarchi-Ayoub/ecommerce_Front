@@ -1,6 +1,6 @@
-li .fa{
-    font-size: 15px;
-    position: relative;
-    margin-right: -10px;
+li svg{
+   font-size: 20px; 
+}   
+svg::after{
+    margin-right: 0.5rem;
 }
-

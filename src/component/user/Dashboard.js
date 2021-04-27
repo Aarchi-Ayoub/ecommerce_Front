@@ -2,7 +2,9 @@ import React, { Fragment ,useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import { isAuthenticate } from '../auth/Authenticate'
 import Layout from '../pages/Layout'
-import './Dashboard.css'
+import { BiUserCircle , BiCartAlt , BiUserPin } from "react-icons/bi";
+import { IoAtSharp , IoKeyOutline } from "react-icons/io5";
+
 const Dashboard = () => {
     // Get user informations from JWT
     const { user : {name , email , role} } = isAuthenticate();
@@ -17,16 +19,13 @@ const Dashboard = () => {
                     <h5 className="card-title">User informations</h5>
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">
-                            <i class="fa fa-user-o" aria-hidden="true"></i>
-                            {name}
+                            <BiUserCircle />{name}
                         </li>
                         <li className="list-group-item">
-                            <i class="fa fa-at" aria-hidden="true"></i>
-                            {email}
+                            <IoAtSharp />{email}
                         </li>
                         <li className="list-group-item">
-                            <i class="fa fa-key" aria-hidden="true"></i>
-                            {role ? 'Admin' : 'User'}
+                            <IoKeyOutline />{role ? 'Admin' : 'User'}
                         </li>
                     </ul>
                 </div>
@@ -50,20 +49,24 @@ const Dashboard = () => {
     const userLinks = ()=> {
         return(
             <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">User links</h5>
-                                <ul className="list-group list-group-flush">
-                                    <li className="list-group-item">
-                                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                        <Link className="nav-link" to="">My card</Link>
-                                    </li>
-                                    <li className="list-group-item">
-                                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                                        <Link className="nav-link" to="">My profile</Link>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                <div className="card-body">
+                    <h5 className="card-title">User links</h5>
+                    <ul className="list-group list-group-flush">
+                        <li className="list-group-item">
+                            <Link className="nav-link" to="">
+                                <BiCartAlt/>
+                                My card
+                            </Link>
+                        </li>
+                        <li className="list-group-item">
+                            <Link className="nav-link" to="">
+                                <BiUserPin/>
+                                My profile
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         )
     }
     return (
