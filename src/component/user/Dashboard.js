@@ -19,13 +19,13 @@ const Dashboard = () => {
                     <h5 className="card-title">User informations</h5>
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">
-                            <BiUserCircle />{name}
+                            <BiUserCircle style={{marginRight:'0.5rem'}}/>{name}
                         </li>
                         <li className="list-group-item">
-                            <IoAtSharp />{email}
+                            <IoAtSharp style={{marginRight:'0.5rem'}}/>{email}
                         </li>
                         <li className="list-group-item">
-                            <IoKeyOutline />{role ? 'Admin' : 'User'}
+                            <IoKeyOutline style={{marginRight:'0.5rem'}}/>{role ? 'Admin' : 'User'}
                         </li>
                     </ul>
                 </div>
@@ -54,13 +54,13 @@ const Dashboard = () => {
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">
                             <Link className="nav-link" to="">
-                                <BiCartAlt/>
+                                <BiCartAlt style={{marginRight:'0.5rem',fontSize:"20px"}}/>
                                 My card
                             </Link>
                         </li>
                         <li className="list-group-item">
                             <Link className="nav-link" to="">
-                                <BiUserPin/>
+                                <BiUserPin style={{marginRight:'0.5rem',fontSize:"20px"}}/>
                                 My profile
                             </Link>
                         </li>
