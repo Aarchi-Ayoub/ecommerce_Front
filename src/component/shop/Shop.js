@@ -3,7 +3,7 @@ import { getCategories , filterProducts } from '../pages/API';
 import Layout from '../pages/Layout'
 import FilterCat from './FilterCat';
 import FilterPrice from './FilterPrice';
-
+import ProductCard from '../pages/ProductCard'
 const Shop = () => {
     // Rename page
     useEffect(()=>document.title='Shop');
@@ -15,9 +15,10 @@ const Shop = () => {
         price : []
     });
     // State of feltering
-    const [ limit , setLimit ] = useState(12);
+    const [ limit , setLimit ] = useState(2);
     const [ skip , setSkip ] = useState(0);
-    const [ productFeltering , setProductFeltering] = useState([]);
+    const [ productFeltering , setProductFeltering ] = useState([]);
+    const [ size , setSize ] = useState(0);
     // Load data from API
     const Categories = () =>{
         getCategories().then(res=> setCategories(res)).catch(err=>console.error(err));
@@ -26,14 +27,38 @@ const Shop = () => {
     useEffect(()=> {
         Categories()
         filterProducts(skip,limit,filters)
-        .then( res => setProductFeltering(res) )
-        .catch( err => console.error(err) );
+            .then( res =>{ 
+                setProductFeltering(res) 
+                setSkip(0);
+                setSize(res.length)
+            })
+            .catch( err => console.error(err) );
+        
     },[filters]);
     // Get data from the child component
     const handelFilter = (data,filterBy)=>{
         setFilters({...filters, [filterBy] : data });
     }
-    
+    // Load more function
+    const loadMore = ()=>{
+        const toSkip = skip + limit;
+        filterProducts(toSkip,limit,filters)
+        .then( res => {
+            setProductFeltering([...productFeltering , ...res]);
+            setSkip(toSkip);
+            setSize(res.length)
+        })
+        .catch( err => console.error(err) );
+    }
+    // Load more button
+    const loadMoreBtn = ()=>{
+        return (
+            size > 0  
+            && size >= limit 
+            &&
+            (<button onClick={loadMore} className="btn btn-raised btn-secondary">More</button>)
+        )
+    }
     return (
         <Fragment>
             <Layout
@@ -42,7 +67,7 @@ const Shop = () => {
                 className="container"
             >
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <FilterCat 
                             categories = { categories }
                             // Recive the checked ID to in DATA  
@@ -53,8 +78,17 @@ const Shop = () => {
                             handelFilter = { (data) => handelFilter(data , 'price') }
                         />
                     </div>
-                    <div className="col-md-8">
-                        {JSON.stringify(productFeltering)}
+                    <div className="col-md-9">
+                        <div className="row">
+                        {
+                            productFeltering && productFeltering.map((p,i)=>(
+                                <div key={i} className="col-md-4 mb-2">
+                                    <ProductCard product={p} key={i}/>
+                                </div>
+                            ))
+                        }
+                        </div>
+                        <center>{ loadMoreBtn() }</center> 
                     </div>
                 </div>
             </Layout>

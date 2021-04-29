@@ -31,7 +31,7 @@ export const filterProducts = (skip,limit,filters) =>{
     const data = {
         filters
     };
-    return fetch(`${API_URL}/products/search`,{
+    return fetch('http://localhost:8000/api/products/search',{
         method  : "POST",
         headers : {
             "Accept" : "application/json",
