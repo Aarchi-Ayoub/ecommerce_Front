@@ -57,6 +57,9 @@ const Menu = (props) => {
                                     Dashboard
                                 </Link>
                             </li>
+                            <li className="nav-item active">
+                                <Link style={isActive(props.history,'/shop')} className="nav-link" to="/shop">Shop</Link>
+                            </li>
                         </Fragment>
                         )
                     }

@@ -51,17 +51,17 @@ const Dashboard = () => {
             <div className="card">
                 <div className="card-body">
                     <h5 className="card-title">User links</h5>
-                    <ul className="list-group list-group-flush">
+                    <ul className="list-group list-group-flush links">
                         <li className="list-group-item">
                             <Link className="nav-link" to="">
                                 <BiCartAlt style={{marginRight:'0.5rem',fontSize:"20px"}}/>
-                                My card
+                                Card
                             </Link>
                         </li>
                         <li className="list-group-item">
                             <Link className="nav-link" to="">
                                 <BiUserPin style={{marginRight:'0.5rem',fontSize:"20px"}}/>
-                                My profile
+                                Profile
                             </Link>
                         </li>
                     </ul>
