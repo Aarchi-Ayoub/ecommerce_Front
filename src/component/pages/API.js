@@ -29,7 +29,7 @@ export const getCategories = () =>{
 // Search products
 export const filterProducts = (skip,limit,filters) =>{
     const data = {
-        filters
+        skip,limit,filters
     };
     return fetch('http://localhost:8000/api/products/search',{
         method  : "POST",

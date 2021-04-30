@@ -15,7 +15,7 @@ const Shop = () => {
         price : []
     });
     // State of feltering
-    const [ limit , setLimit ] = useState(2);
+    const [ limit , setLimit ] = useState(3);
     const [ skip , setSkip ] = useState(0);
     const [ productFeltering , setProductFeltering ] = useState([]);
     const [ size , setSize ] = useState(0);
@@ -28,21 +28,18 @@ const Shop = () => {
         Categories()
         filterProducts(skip,limit,filters)
             .then( res =>{ 
-                setProductFeltering(res) 
+                setProductFeltering(res);
+                setSize(res.length); 
                 setSkip(0);
-                setSize(res.length)
             })
             .catch( err => console.error(err) );
         
     },[filters]);
-    // Get data from the child component
-    const handelFilter = (data,filterBy)=>{
-        setFilters({...filters, [filterBy] : data });
-    }
+    
     // Load more function
     const loadMore = ()=>{
         const toSkip = skip + limit;
-        filterProducts(toSkip,limit,filters)
+        filterProducts(toSkip, limit, filters)
         .then( res => {
             setProductFeltering([...productFeltering , ...res]);
             setSkip(toSkip);
@@ -58,6 +55,10 @@ const Shop = () => {
             &&
             (<button onClick={loadMore} className="btn btn-raised btn-secondary">More</button>)
         )
+    }
+    // Get data from the child component
+    const handelFilter = (data,filterBy)=>{
+        setFilters({...filters, [filterBy] : data });
     }
     return (
         <Fragment>

@@ -4,7 +4,7 @@ import { AiOutlineShopping , AiOutlineInfoCircle } from "react-icons/ai";
 const ProductCard = ({product}) => {
     return (
         <div>
-            <div className="card text-justify" style={{minHeight:'500px', maxHeight:'500px'}}>
+            <div className="card text-justify" style={{ minHeight:'500px', maxHeight:'500px'}}>
                 <div className="card-header">
                     <center><h4 className="display-6">{product.name}</h4></center>
                 </div>
@@ -18,14 +18,9 @@ const ProductCard = ({product}) => {
                     <p className="float-right">
                         <span className="badge badge-pill badge-danger" style={{fontSize:"15px"}}>{product.price} MAD</span>
                     </p>
-                </div>
-                <div className="row mx-auto mb-2">
-                    <div className="col-md">
-                        <button title="add to card" style={{borderRadius:"25px"}} className="btn btn-raised btn-sm mr-2 btn-primary"><AiOutlineShopping style={{fontSize:"30px"}} /></button>
-                    </div>
-                    <div className="col-md">
-                        <button title="product info" style={{borderRadius:"25px"}} className="btn btn-raised btn-sm btn-warning"><AiOutlineInfoCircle style={{fontSize:"30px"}}/></button>
-                    </div>
+                
+                    <button title="add to card" style={{borderRadius:"25px"}} className="btn btn-raised btn-sm mr-2 btn-primary"><AiOutlineShopping style={{fontSize:"30px"}} /></button>
+                    <button title="product info" style={{borderRadius:"25px"}} className="btn btn-raised btn-sm btn-warning"><AiOutlineInfoCircle style={{fontSize:"30px"}}/></button>
                 </div>
             </div>
         </div>
