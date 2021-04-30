@@ -21,7 +21,7 @@ const Shop = () => {
     const [ size , setSize ] = useState(0);
     // Load data from API
     const Categories = () =>{
-        getCategories().then(res=> setCategories(res)).catch(err=>console.error(err));
+        getCategories().then(res=> setCategories(res.data)).catch(err=>console.error(err));
     }
     // Load data in mounting
     useEffect(()=> {

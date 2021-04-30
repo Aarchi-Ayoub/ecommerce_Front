@@ -5,6 +5,7 @@ import { API_URL } from '../../../config';
 import { isAuthenticate } from '../../auth/Authenticate';
 import toastr from 'toastr'
 import 'toastr/build/toastr.css'
+import { getCategories } from '../../pages/API';
 const AddProduct = () => {
     // Category name state
     const [ product , setProduct] = useState({
@@ -20,22 +21,13 @@ const AddProduct = () => {
     const [ formData , setFormData ] = useState(new FormData());
     const [ categories , setCategories ] = useState([]);
     // Get categories
-    const getCategories = () =>{
-        fetch(`${API_URL}/categories`,{
-            method  : "GET",
-            headers : {
-                "Accept" : "application/json",
-                "Content-Type" : "application/json"
-            }
-        })
-        .then(res => res.json())
-        .then(res => setCategories(res.data))
-        .catch(err => console.error(err))
+    const getCat = () =>{
+        getCategories().then(res => setCategories(res.data))
     }
     // Info from token
     const { user , token } = isAuthenticate();
     // Title of pages
-    useEffect(() => getCategories(),[])
+    useEffect(() => getCat(),[])
     // Manipulate the inputs changes
     const handelChanges = e=>{
         const value = e.target.name === 'photo' ? e.target.files[0] : e.target.value;

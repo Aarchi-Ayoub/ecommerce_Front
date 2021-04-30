@@ -1,8 +1,9 @@
 import { API_URL } from '../../config'
-
+import queryString from 'query-string'
 // Get products
-export const  getProducts = ( sortBy, orderBy, limit )=>{
-    return fetch(`${API_URL}/products?sortBy=${sortBy}&orderBy=${orderBy}&limit=${limit}`,{
+export const  getProducts = ( params )=>{
+    let query = queryString.stringify(params);
+    return fetch(`${API_URL}/products?${query}`,{
         method  : "GET",
         headers : {
             "Accept"        :   "application/json",
@@ -14,24 +15,33 @@ export const  getProducts = ( sortBy, orderBy, limit )=>{
     .catch(err => console.error(err))
 }
 // Get categories
-export const getCategories = () =>{
-    return fetch(`${API_URL}/categories`,{
-        method  : "GET",
+export const getCategories = async () =>{
+    // return fetch(`${API_URL}/categories`,{
+    //     method  : "GET",
+    //         headers : {
+    //             "Accept" : "application/json",
+    //             "Content-Type" : "application/json"
+    //         }
+    // })
+    // .then(res => res.json())
+    // .then(res =>res.data)
+    // .catch(err => console.error(err))
+    return await fetch(`${API_URL}/categories`,{
+            method  : "GET",
             headers : {
                 "Accept" : "application/json",
                 "Content-Type" : "application/json"
             }
-    })
-    .then(res => res.json())
-    .then(res =>res.data)
-    .catch(err => console.error(err))
+        })
+        .then(res => res.json())
+        .catch(err => console.error(err))
 }
 // Search products
 export const filterProducts = (skip,limit,filters) =>{
     const data = {
         skip,limit,filters
     };
-    return fetch('http://localhost:8000/api/products/search',{
+    return fetch(`${API_URL}/products/search`,{
         method  : "POST",
         headers : {
             "Accept" : "application/json",
