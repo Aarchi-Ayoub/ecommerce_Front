@@ -34,6 +34,7 @@ const SearchProd = () => {
             .catch(err => console.error(err))
         }else{
             setProduct([]);
+            setResult(0);
         }
     }
     // Load categry in mounting page
@@ -61,10 +62,10 @@ const SearchProd = () => {
             <hr />
             { 
                 (result && result > 0) ?  
-                <div style={{fontSize:"25px"}}>
+                (<div style={{fontSize:"25px"}}>
                     <span className="float-right"><b>{result}</b> courses found</span>
                     <br/>
-                </div>
+                </div>)
                 : null
             }
             <div className="row">

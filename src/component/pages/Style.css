@@ -1,7 +1,7 @@
 .jumbotron {
     width: 30wh;
-    height: 17vh;
-    padding: 1rem 2rem !important;
+    height: 20vh;
+    padding: 2rem 2rem !important;
     color: #fff;
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
     background-size: 400% 400%;

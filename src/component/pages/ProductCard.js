@@ -3,7 +3,11 @@ import ShowImage from './ShowImage'
 import { AiOutlineShopping , AiOutlineInfoCircle } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import moment from 'moment'
+import { addToCart } from '../../actions/CartActions';
+import { useDispatch } from 'react-redux'
 const ProductCard = ({product , showButton = true }) => {
+    // For using method declaring in actions
+    const dispatch = useDispatch()
     // Get quantity 
     const stock = (quantity)=>{
         return quantity > 0 ?
@@ -33,8 +37,9 @@ const ProductCard = ({product , showButton = true }) => {
                     <div className="row mt-5 float-right">
                         {
                             product.quantity > 0 ?
-                            <Link className="card-link" to={`/product/${product._id}`}>
+                            <Link className="card-link">
                             <button 
+                                onClick ={ () => dispatch(addToCart(product)) }
                                 title="add to card" 
                                 style={{borderRadius:"25px"}} 
                                 className="btn btn-raised btn-sm  btn-primary">

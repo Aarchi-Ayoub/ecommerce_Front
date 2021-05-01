@@ -4,6 +4,9 @@ import { API_URL } from '../../config'
 import toastr from 'toastr'
 import 'toastr/build/toastr.css'
 import { isAuthenticate } from '../auth/Authenticate'
+import { AiOutlinePoweroff } from "react-icons/ai";
+
+import { useSelector } from 'react-redux'
 // history : un systéme qui nous permet de savoir l'url en cours
 const isActive = (history,path)=>{
     if(history.location.pathname === path){
@@ -31,9 +34,10 @@ const Menu = (props) => {
         })
         .catch();
     }
-    
+    // Acced from reducer
+    let countItems = useSelector(state => state.Cart.count);
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-info">
+        <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-info">
             <Link className="navbar-brand" to="/">Ecommerce</Link>
             
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,13 +80,21 @@ const Menu = (props) => {
                             </li>
                         </Fragment>
                     )
-                }
-                    {
-                        isAuthenticate() && (
+                }        
+                <li className="nav-item active">
+                    <Link style={isActive(props.history,'/cart')} className="nav-link" to="/cart" style={{cursor:'pointer', fontSize:"20px"}}className="nav-link">
+                        <span className="badge badge-warning">{countItems}</span>
+                    </Link>
+                </li>            
+                {
+                    isAuthenticate() && (                        
                         <li className="nav-item">
-                            <span style={{cursor:'pointer'}} onClick={singOut} className="nav-link">Sing Out</span>
-                        </li>)
-                    }
+                            <span style={{cursor:'pointer'}}  className="nav-link" onClick={singOut} className="nav-link">
+                                <AiOutlinePoweroff/>
+                            </span>
+                        </li>
+                    )
+                }
                     
                 </ul>   
             </div>
