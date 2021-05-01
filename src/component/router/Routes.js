@@ -12,6 +12,7 @@ import AddCategory from '../admin/category/AddCategory'
 import AddProduct from '../admin/product/AddProduct'
 import NotFound from '../pages/NotFound'
 import Shop from '../shop/Shop'
+import Product from '../products/Product'
 
 const Routes = () => {
     return (
@@ -29,6 +30,8 @@ const Routes = () => {
 
                 <Route exact path="/singin" component={SingIn} />
                 <Route exact path="/singup" component={SingUp} />
+                <Route exact path="/product/:id" component={Product} />
+
                 <Route component={NotFound} />
             </Switch>
         </Router>
