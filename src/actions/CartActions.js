@@ -38,3 +38,13 @@ export const desincrement = (product)=>{
         type    : null
     }
 }
+
+export const rmoveFromCart = (id)=>{
+    let items   = JSON.parse(localStorage.getItem('cart'));
+    items       = items.filter(item => item._id !== id)
+    localStorage.setItem('cart',JSON.stringify(items));
+    return {
+        type    : 'Remove_Item',
+        payload : items
+    }
+}

@@ -5,6 +5,7 @@ import toastr from 'toastr'
 import 'toastr/build/toastr.css'
 import { isAuthenticate } from '../auth/Authenticate'
 import { AiOutlinePoweroff } from "react-icons/ai";
+import { BsPencil } from "react-icons/bs";
 
 import { useSelector } from 'react-redux'
 // history : un systéme qui nous permet de savoir l'url en cours
@@ -69,27 +70,40 @@ const Menu = (props) => {
                     }
                 </ul>   
                 <ul className="navbar-nav ml-auto"> 
+                <li className="nav-item active">
+                    <Link 
+                        title="My Cart" 
+                        to="/cart" 
+                        style={{cursor:'pointer', fontSize:"20px",marginTop:"-3px"}}
+                        className="nav-link" >
+                        <span className="badge badge-warning">{countItems}</span>
+                    </Link>
+                </li>  
                 {
                     !isAuthenticate() && (
                         <Fragment>
                             <li className="nav-item">
-                                <Link style={isActive(props.history,'/singin')} className="nav-link" to="/singin">Connexion</Link>
+                                <Link style={isActive(props.history,'/singin')} className="nav-link" to="/singin">
+                                    <span style={{cursor:'pointer',color:"green"}} title="SingIn">
+                                        <AiOutlinePoweroff/>
+                                    </span>
+                                </Link>
                             </li>
+                            
                             <li className="nav-item">
-                                <Link style={isActive(props.history,'/singup')} className="nav-link" to="/singup">Register</Link>
+                                <Link style={isActive(props.history,'/singup')} className="nav-link" to="/singup">
+                                    <span style={{cursor:'pointer',color:"orange"}} title="Register">
+                                        <BsPencil/>
+                                    </span>
+                                </Link>
                             </li>
                         </Fragment>
                     )
-                }        
-                <li className="nav-item active">
-                    <Link style={isActive(props.history,'/cart')} className="nav-link" to="/cart" style={{cursor:'pointer', fontSize:"20px"}}className="nav-link">
-                        <span className="badge badge-warning">{countItems}</span>
-                    </Link>
-                </li>            
+                }                  
                 {
                     isAuthenticate() && (                        
                         <li className="nav-item">
-                            <span style={{cursor:'pointer'}}  className="nav-link" onClick={singOut} className="nav-link">
+                            <span style={{cursor:'pointer',color:"red"}} title="SingOut" onClick={singOut} className="nav-link">
                                 <AiOutlinePoweroff/>
                             </span>
                         </li>

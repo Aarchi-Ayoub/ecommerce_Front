@@ -12,7 +12,14 @@ const CartReducer =( state = initialState , action)=>{
             return {
                 ...state,
                 products: action.payload ,
-                count   : action.payload.length
+                count   : action.payload.reduce((total,product)=>total+product.count,0)
+            }
+        };
+        case 'Remove_Item' : {
+            return {
+                ...state,
+                products: action.payload ,
+                count   : action.payload.reduce((total,product)=>total+product.count,0)
             }
         };
         case 'Increment' : {

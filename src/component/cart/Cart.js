@@ -3,7 +3,9 @@ import { useSelector , useDispatch } from 'react-redux'
 import Layout from '../pages/Layout'
 import ShowImage from '../pages/ShowImage'
 import { VscDiffRemoved , VscDiffAdded } from "react-icons/vsc"
-import { increment , desincrement } from '../../actions/CartActions'
+import { AiOutlineDelete } from "react-icons/ai"
+import { increment , desincrement , rmoveFromCart } from '../../actions/CartActions'
+import Chekout from './Chekout'
 const Cart = () => {
     // Get the products from localStorage
     let productsInCart = useSelector(state => state.Cart.products)
@@ -13,7 +15,7 @@ const Cart = () => {
         <Layout
                 title="My cart"
                 description = "Products in my cart..."
-                className="container"
+                className="container-fluid"
         >
             <div className="row">
                 <div className="col-md-9">
@@ -25,6 +27,7 @@ const Cart = () => {
                                 <th>Quantity</th>
                                 <th>Price</th>
                                 <th>Total</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,6 +62,11 @@ const Cart = () => {
                                         </td>
                                         <td>{p.price} MAD</td>
                                         <td>{p.price * p.count} MAD</td>
+                                        <td className="text-right">
+                                            <button onClick={()=>dispatch(rmoveFromCart(p._id))} className="btn btn-lg btn-danger" title="Delete">
+                                                <AiOutlineDelete />
+                                            </button>
+                                        </td>
                                     </tr>
                                 ))
                             }
@@ -66,7 +74,7 @@ const Cart = () => {
                     </table>
                 </div>
                 <div className="col md-3">
-
+                            <Chekout products={productsInCart}/>
                 </div>
             </div>
         </Layout>
