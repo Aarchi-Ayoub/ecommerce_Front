@@ -73,3 +73,29 @@ export const filterProducts = (skip,limit,filters) =>{
     .then(res =>res.products)
     .catch(err => console.error(err))
 }
+
+// Get braintree token
+export const getBraintreeToken = (userID, token) =>{
+    return fetch(`${API_URL}/braintree/token/${userID}`,{
+            method  : "GET",
+            headers : {
+                Accept : "application/json",
+                ContentType : "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(res => res.json())
+}
+
+// Process payement
+export const procesPayement = (userID, token, paymentData) =>{
+    return fetch(`${API_URL}/braintree/purchase/${userID}`,{
+            method  : "POST",
+            headers : {
+                Accept : "application/json",
+                "Content-Type" : "application/json",
+                Authorization: `Bearer ${token}`
+            },body : JSON.stringify(paymentData)
+        })
+        .then(res => res.json())
+}
