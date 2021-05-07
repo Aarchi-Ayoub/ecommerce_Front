@@ -1,7 +1,7 @@
 import React, { useEffect , useState} from 'react'
 import { Link } from 'react-router-dom';
 import { isAuthenticate } from '../auth/Authenticate';
-import { getBraintreeToken, procesPayement } from '../pages/API';
+import { createOrder, getBraintreeToken, procesPayement } from '../pages/API';
 import DropIn from "braintree-web-drop-in-react";
 import toastr from 'toastr';
 const Chekout = ({ products }) => {
@@ -9,7 +9,8 @@ const Chekout = ({ products }) => {
     const [ data , setData ] = useState({
         braintreeToken  : null,
         error           : null,
-        instance        : {}
+        instance        : {},
+        adress          : ''
     });
     // Get the user id & token authenticate from localStorage
     const userID    = isAuthenticate() && isAuthenticate().user._id;
@@ -44,6 +45,7 @@ const Chekout = ({ products }) => {
     }
     // Buy method
     const buy = ()=>{
+        const adress = data.adress;
         data.instance.requestPaymentMethod()
             .then(data  => {
                 let paymentData = {
@@ -53,6 +55,16 @@ const Chekout = ({ products }) => {
                 procesPayement(userID, userToken,paymentData)
                     .then(res => { 
                         // console.log(res)
+                        let orderData = { 
+                            products,
+                            transaction_id: res.transaction.id,
+                            amount: res.transaction.amount,
+                            address: adress
+                        };
+                        createOrder(userID, userToken,orderData)
+                            .then(res => console.log(res))
+                            .catch(err => console.error(err));
+                        // Remove the cart array from the LS
                         localStorage.removeItem('cart');
                         toastr.success("Operation end with success",'Valid',{
                             positionClass: "toast-bottom-left"
@@ -68,7 +80,7 @@ const Chekout = ({ products }) => {
                     positionClass: "toast-bottom-left"
                 })
             })
-            .catch(err  => { toastr.error(err.message,'Invalid',{
+            .catch(err  => { toastr.error(err.message,'Error',{
                     positionClass: "toast-bottom-left"
                 })
             });
@@ -90,9 +102,17 @@ const Chekout = ({ products }) => {
             </Link>)
         }
     }
+    // Get adress 
+    const handelChanges = e =>{
+        setData({...data, adress : e.target.value})
+    }
     return (
         <div>
             <h2 className="text-center">Total : {calcul(products)} MAD</h2>
+            <div className="form-group">
+              <label for="adress" className="text-muted">Livraison adress :</label>
+              <textarea className="form-control" onChange={handelChanges} name="adress" id="adress" rows="3"></textarea>
+            </div>
             { button() }
         </div>
     )

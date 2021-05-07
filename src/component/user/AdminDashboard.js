@@ -4,6 +4,7 @@ import { isAuthenticate } from '../auth/Authenticate'
 import Layout from '../pages/Layout'
 import { BiUserCircle } from "react-icons/bi";
 import { IoAddCircle , IoAtSharp , IoKeyOutline } from "react-icons/io5";
+import { GrUnorderedList } from "react-icons/gr";
 import './Dashboard.css'
 const AdminDashboard = () => {
     // Get user informations from JWT
@@ -41,12 +42,18 @@ const AdminDashboard = () => {
                     <ul className="list-group list-group-flush links">
                         <li className="list-group-item">
                             <Link className="nav-link" to="/category/create">
-                                Category <IoAddCircle style={{marginRight:'0.5rem',fontSize:"20px"}} />
+                                 <IoAddCircle style={{marginRight:'0.5rem',fontSize:"20px"}} />Category
                             </Link>
                         </li>
                         <li className="list-group-item">
                             <Link className="nav-link" to="/product/create">
-                                Product <IoAddCircle style={{marginRight:'0.5rem',fontSize:"20px"}} />
+                                 <IoAddCircle style={{marginRight:'0.5rem',fontSize:"20px"}} />Product
+                            </Link>
+                        </li>
+
+                        <li className="list-group-item">
+                            <Link className="nav-link" to="/admin/order">
+                                 <GrUnorderedList style={{marginRight:'0.5rem',fontSize:"20px"}} />Orders
                             </Link>
                         </li>
                     </ul>

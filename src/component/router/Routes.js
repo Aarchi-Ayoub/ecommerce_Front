@@ -14,6 +14,7 @@ import NotFound from '../pages/NotFound'
 import Shop from '../shop/Shop'
 import Product from '../products/Product'
 import Cart from '../cart/Cart'
+import ListOrders from '../admin/order/ListOrders'
 
 const Routes = () => {
     return (
@@ -28,6 +29,7 @@ const Routes = () => {
                 <AdminRoute exact path="/category/create" component={AddCategory} />
                 <AdminRoute exact path="/product/create" component={AddProduct} />
                 <AdminRoute exact path="/shop" component={Shop} />
+                <AdminRoute exact path="/admin/order" component={ListOrders} />
 
                 <Route exact path="/singin" component={SingIn} />
                 <Route exact path="/singup" component={SingUp} />

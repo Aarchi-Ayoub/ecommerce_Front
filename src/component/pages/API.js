@@ -99,3 +99,16 @@ export const procesPayement = (userID, token, paymentData) =>{
         })
         .then(res => res.json())
 }
+
+// Create order
+export const createOrder = (userID, token, orderData) =>{
+    return fetch(`${API_URL}/order/create/${userID}`,{
+            method  : "POST",
+            headers : {
+                Accept : "application/json",
+                "Content-Type" : "application/json",
+                Authorization: `Bearer ${token}`
+            },body : JSON.stringify(orderData)
+        })
+        .then(res => res.json())
+}

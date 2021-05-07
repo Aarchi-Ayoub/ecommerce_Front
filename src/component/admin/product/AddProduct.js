@@ -40,8 +40,8 @@ const AddProduct = () => {
         fetch(`${API_URL}/products/create/${user._id}`, {
             method: "POST",
             headers: {
-                "Accept": "application/json",
-                "Authorization": `Bearer ${token}`
+                "Accept"        :   "application/json",
+                "Authorization" :   `Bearer ${token}`
             },
             body: formData
         })
